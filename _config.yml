@@ -1,1 +1,31 @@
-theme: jekyll-theme-cayman
+remote_theme: hydecorp/hydejack@v9.1.6
+accent_color: rgb(0,255,0)
+
+plugins:
+  - jekyll-include-cache
+  
+title: Naga Devarinti
+lang: en
+
+# Blog settings
+paginate:      10
+paginate_path: /blog/:num/ #!!
+
+menu:
+  - title: Blog
+    url:   /blog/
+  - title: Projects
+    url:   /projects/
+  - title: Resume
+    url:   /resume/
+  - title: About
+    url:   /about/
+
+author:
+  name:  Naga Sai Abhinay Devarinti
+  picture:  /assets/img/me.jpeg
+  social: 
+    email: devarintinagasaiabhinay@gmail.com
+    github: Abhinay1997
+    linkedin: nagasaiabhinay
+  
