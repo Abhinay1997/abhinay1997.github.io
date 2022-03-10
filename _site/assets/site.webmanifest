@@ -4,7 +4,7 @@
   "short_name": "Naga Devarinti",
   "description": "Personal Website",
   "start_url": "/?utm_source=homescreen",
-  "theme_color": "rgb(0,255,0)",
+  "theme_color": "rgb( 17, 250, 13)",
   "background_color": "#fff",
   "orientation": "portrait",
   "display": "minimal-ui",

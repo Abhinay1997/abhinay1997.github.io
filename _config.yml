@@ -1,14 +1,11 @@
 remote_theme: hydecorp/hydejack@v9.1.6
-accent_color: rgb(0,255,0)
-
-plugins:
-  - jekyll-include-cache
+accent_color: rgb( 17, 250, 13)
   
 title: Naga Devarinti
 lang: en
 
 # Blog settings
-paginate:      10
+paginate: 10
 paginate_path: /blog/:num/ #!!
 
 menu:
@@ -29,3 +26,22 @@ author:
     github: Abhinay1997
     linkedin: nagasaiabhinay
   
+# Hydejack specific settings.
+hydejack:
+  # Code blocks and tables "break" the layout by spanning the full available width.
+  # Set this to true if you want them to be the same width as other content.
+  no_break_layout:     true
+
+plugins:
+  - jekyll-default-layout
+  - jekyll-feed
+  - jekyll-optional-front-matter
+  - jekyll-paginate
+  - jekyll-readme-index
+  - jekyll-redirect-from
+  - jekyll-relative-links
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-titles-from-headings
+  - jekyll-include-cache
+  - jekyll-last-modified-at

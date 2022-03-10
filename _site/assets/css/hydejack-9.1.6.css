@@ -522,20 +522,7 @@ main > footer.content > p { margin-bottom: 0; }
 @media print { main > footer.content { display: none; } }
 
 @media screen { a.external::after, a[href*="://"]:not(.no-mark-external):not(.no-mark)::after, a.no-push-state:not(.no-mark-external):not(.no-mark)::after { content: "\2009\ea7e"; font-family: "icomoon" !important; speak: none; font-style: normal; font-weight: normal; font-variant: normal; text-transform: none; line-height: 1; font-size: smaller; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; color: var(--menu-text); } }
-@media screen { pre, table:not(.highlight), .katex-display, .break-layout, mjx-container[jax="CHTML"][display="true"] { position: relative; width: calc(100% + 2rem); border-top-right-radius: 0 !important; border-bottom-right-radius: 0 !important; } }
-@media screen and (min-width: 42rem) { pre, table:not(.highlight), .katex-display, .break-layout, mjx-container[jax="CHTML"][display="true"] { width: calc(100% + 50vw - 19rem); } }
-@media screen and (min-width: 54em) { pre, table:not(.highlight), .katex-display, .break-layout, mjx-container[jax="CHTML"][display="true"] { width: calc(100% + 50vw - 22rem); } }
-@media screen and (min-width: 64em) { pre, table:not(.highlight), .katex-display, .break-layout, mjx-container[jax="CHTML"][display="true"] { width: calc(100vw - 24rem); } }
-@media screen and (min-width: 86em) { pre, table:not(.highlight), .katex-display, .break-layout, mjx-container[jax="CHTML"][display="true"] { width: calc(100% + 100vw - 77rem); } }
-@media screen and (min-width: 1664px) { pre, table:not(.highlight), .katex-display, .break-layout, mjx-container[jax="CHTML"][display="true"] { width: calc(100% + 50vw - 46rem + 2px); } }
-
-body:not(.no-break-layout) .katex-display > .katex, body:not(.no-break-layout) mjx-container[jax][display="true"] { text-align: left !important; }
-
-body.no-break-layout { width: calc(100% + 6rem); }
-
-@media screen and (min-width: 1664px) { body.no-toc:not(.no-break-layout) pre, body.no-toc:not(.no-break-layout) table:not(.highlight), body.no-toc:not(.no-break-layout) .katex-display, body.no-toc:not(.no-break-layout) .break-layout, body.no-toc:not(.no-break-layout) mjx-container[jax="CHTML"][display="true"] { width: calc(100% + 50vw - 25rem); } }
-
-html { --body-bg: #1f1f1f; --body-color: #fff; }
+html { --body-bg: #0D0D0D; --body-color: #e1e1e1; --gray-bg: #1D1D1D; --border-color: #2d2d2d; }
 
 .note:before { content: "Note"; }
 

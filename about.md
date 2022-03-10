@@ -3,4 +3,6 @@ layout: about
 permalink: /about/
 ---
 
-Placeholder for the about page.
+Hello !
+
+I am Naga Sai Abhinay Devarinti, a software developer from Hyderabad, India !
