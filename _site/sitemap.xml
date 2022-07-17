@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
-<loc>http://localhost:4000/2022/03/10/Building-a-simple-adder-JS.html</loc>
-<lastmod>2022-03-10T00:00:00+05:30</lastmod>
-</url>
-<url>
-<loc>http://localhost:4000/2022/03/10/first.html</loc>
-<lastmod>2022-03-10T09:19:43+05:30</lastmod>
+<loc>http://localhost:4000/2022/07/17/export_dof_iphone_portrait.html</loc>
+<lastmod>2022-07-17T00:00:00+05:30</lastmod>
 </url>
 <url>
 <loc>http://localhost:4000/about/</loc>
 </url>
 <url>
 <loc>http://localhost:4000/blog/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/projects/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/resume/</loc>
 </url>
 <url>
 <loc>http://localhost:4000/</loc>

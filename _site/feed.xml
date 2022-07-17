@@ -1,37 +1,93 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="en" /><updated>2022-03-10T20:18:58+05:30</updated><id>http://localhost:4000/feed.xml</id><title type="html">Naga Devarinti</title><subtitle>Personal Website</subtitle><author><name>Naga Sai Abhinay Devarinti</name></author><entry><title type="html">Building a simple adder in JS</title><link href="http://localhost:4000/2022/03/10/first.html" rel="alternate" type="text/html" title="Building a simple adder in JS" /><published>2022-03-10T09:19:43+05:30</published><updated>2022-03-10T09:19:43+05:30</updated><id>http://localhost:4000/2022/03/10/first</id><content type="html" xml:base="http://localhost:4000/2022/03/10/first.html">&lt;p&gt;This is my first blog post.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="en" /><updated>2022-07-17T21:34:15+05:30</updated><id>http://localhost:4000/feed.xml</id><title type="html">Naga Sai Abhinay Devarinti</title><subtitle>Personal Website</subtitle><author><name>Naga Sai Abhinay Devarinti</name></author><entry><title type="html">Extracting Depth of Field JPG from iPhone portraits</title><link href="http://localhost:4000/2022/07/17/export_dof_iphone_portrait.html" rel="alternate" type="text/html" title="Extracting Depth of Field JPG from iPhone portraits" /><published>2022-07-17T00:00:00+05:30</published><updated>2022-07-17T00:00:00+05:30</updated><id>http://localhost:4000/2022/07/17/export_dof_iphone_portrait</id><content type="html" xml:base="http://localhost:4000/2022/07/17/export_dof_iphone_portrait.html">&lt;ol id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#overview&quot; id=&quot;markdown-toc-overview&quot;&gt;Overview&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#what-doesnt-work&quot; id=&quot;markdown-toc-what-doesnt-work&quot;&gt;What doesn’t work&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#what-works&quot; id=&quot;markdown-toc-what-works&quot;&gt;What works&lt;/a&gt;    &lt;ol&gt;
+      &lt;li&gt;&lt;a href=&quot;#directly-capturing-images-as-jpgs&quot; id=&quot;markdown-toc-directly-capturing-images-as-jpgs&quot;&gt;Directly capturing images as JPG’s&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#copying-images-from-photos-to-files&quot; id=&quot;markdown-toc-copying-images-from-photos-to-files&quot;&gt;Copying images from Photos to Files&lt;/a&gt;&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#final-result&quot; id=&quot;markdown-toc-final-result&quot;&gt;Final Result&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
 
-&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// file: &quot;code-block.js&quot;&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// Example can be run directly in your JavaScript console&lt;/span&gt;
+&lt;h2 id=&quot;overview&quot;&gt;Overview&lt;/h2&gt;
+&lt;p&gt;Humans percieve depth using binocular vision i.e in the overlapping space that both the eyes observe, our brains can estimate/perceive how far the objects are based on the difference in postion that each eye sees the object at. This is &lt;a href=&quot;https://en.wikipedia.org/wiki/Stereopsis&quot;&gt;stereopsis&lt;/a&gt;.&lt;/p&gt;
 
-&lt;span class=&quot;c1&quot;&gt;// Create a function that takes two arguments and returns the sum of those&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// arguments&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;adder&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;return a + b&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;p&gt;This effect can be replicated by using a dual camera system to understand how far objects in a scene are located relative to the observer i.e an estimate of which objects are closer to the camera and which ones are further away.&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 
-&lt;span class=&quot;c1&quot;&gt;// Call the function&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;adder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// &amp;gt; 8&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Modern day smartphones make use of this technique to identify and blur the background objects while keeping the subject in focus, resulting in a depth effect on the final image.&lt;/p&gt;
 
-&lt;p class=&quot;figcaption&quot;&gt;An optional caption for a code block&lt;/p&gt;
+&lt;p class=&quot;centered&quot;&gt;&lt;img src=&quot;https://support.apple.com/library/content/dam/edam/applecare/images/en_US/ios/iphoto/ios15-iphone12-pro-camera-portrait-mode.png&quot; alt=&quot;Full width image&quot; width=&quot;250px&quot; align=&quot;center&quot; /&gt;&lt;/p&gt;
 
-&lt;p class=&quot;note&quot;&gt;This is a note&lt;/p&gt;
+&lt;p class=&quot;figcaption&quot;&gt;Portrait mode on an iPhone&lt;/p&gt;
 
-&lt;p class=&quot;note&quot; title=&quot;My Custom Notes&quot;&gt;This is a custom note&lt;/p&gt;</content><author><name>Naga Sai Abhinay Devarinti</name></author><summary type="html">This is my first blog post.</summary></entry><entry><title type="html">Building a simple adder in JS</title><link href="http://localhost:4000/2022/03/10/Building-a-simple-adder-JS.html" rel="alternate" type="text/html" title="Building a simple adder in JS" /><published>2022-03-10T00:00:00+05:30</published><updated>2022-03-10T00:00:00+05:30</updated><id>http://localhost:4000/2022/03/10/Building%20a%20simple%20adder%20JS</id><content type="html" xml:base="http://localhost:4000/2022/03/10/Building-a-simple-adder-JS.html">&lt;p&gt;This is my first blog post.&lt;/p&gt;
+&lt;p&gt;The depth information should be stored as an additional image in the JPG file&lt;sup id=&quot;fnref:3&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:3&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;. In case of HEIC images it would be stored in the metadata.&lt;/p&gt;
 
-&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// file: &quot;code-block.js&quot;&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// Example can be run directly in your JavaScript console&lt;/span&gt;
+&lt;p&gt;So now, the plan is to extract the depth information itself from the captured image. We’ll use &lt;a href=&quot;https://photopea.com&quot;&gt;Photopea&lt;/a&gt; to quickly check if the exported image has depth information. For reference, Photopea shows the depth information as an additional layer.&lt;/p&gt;
 
-&lt;span class=&quot;c1&quot;&gt;// Create a function that takes two arguments and returns the sum of those&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// arguments&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;adder&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;return a + b&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;p class=&quot;centered&quot;&gt;&lt;img src=&quot;/assets/posts/images/photopea_example.png&quot; alt=&quot;Full width image&quot; /&gt;&lt;/p&gt;
 
-&lt;span class=&quot;c1&quot;&gt;// Call the function&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;adder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// &amp;gt; 8&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;what-doesnt-work&quot;&gt;What doesn’t work&lt;/h2&gt;
 
-&lt;p class=&quot;figcaption&quot;&gt;An optional caption for a code block&lt;/p&gt;
+&lt;p&gt;Images captured by the iPhone’s camera app by default are saved as HEIC files. Converting the HEIC to a JPG online or using the Preview utility on macOS doesn’t seem to preserve the depth information.&lt;/p&gt;
 
-&lt;p class=&quot;note&quot;&gt;This is a note&lt;/p&gt;
+&lt;p&gt;It doesn’t work even after setting the sharing options while moving the HEIC image as “All Data”.&lt;/p&gt;
 
-&lt;p class=&quot;note&quot; title=&quot;My Custom Notes&quot;&gt;This is a custom note&lt;/p&gt;</content><author><name>Naga Sai Abhinay Devarinti</name></author><summary type="html">This is my first blog post.</summary></entry></feed>
+&lt;h2 id=&quot;what-works&quot;&gt;What works&lt;/h2&gt;
+
+&lt;h3 id=&quot;directly-capturing-images-as-jpgs&quot;&gt;Directly capturing images as JPG’s&lt;/h3&gt;
+
+&lt;p&gt;You can change the camera app settings to save images as JPG’s. Go to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Settings&lt;/code&gt; &amp;gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Camera&lt;/code&gt; &amp;gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Formats&lt;/code&gt; &amp;gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Camera Capture&lt;/code&gt; and set it to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Most Compatible&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p class=&quot;centered&quot;&gt;&lt;img src=&quot;/assets/posts/images/camera_settings1.gif&quot; alt=&quot;Full width image&quot; width=&quot;250px&quot; align=&quot;center&quot; /&gt;&lt;/p&gt;
+
+&lt;p class=&quot;figcaption&quot;&gt;Changing the camera capture format&lt;/p&gt;
+
+&lt;h3 id=&quot;copying-images-from-photos-to-files&quot;&gt;Copying images from Photos to Files&lt;/h3&gt;
+
+&lt;p&gt;If you already have images captured in Portrait mode, you can export them to JPEG/JPG on your iPhone first by making a copy to the Files app.&lt;/p&gt;
+
+&lt;p&gt;To do this, simply long press on the picture in your Photos, select &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;copy&lt;/code&gt;. Now open &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Files&lt;/code&gt;, go to your desired folder and long press to bring up the options. Select &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;paste&lt;/code&gt; and the saved image should be in the JPEG format.&lt;/p&gt;
+
+&lt;p class=&quot;centered&quot;&gt;&lt;img src=&quot;/assets/posts/images/jpg_depth_map2.gif&quot; alt=&quot;Full width image&quot; width=&quot;250px&quot; align=&quot;center&quot; /&gt;&lt;/p&gt;
+
+&lt;p class=&quot;figcaption&quot;&gt;Saving a photo as a JPEG&lt;/p&gt;
+
+&lt;h2 id=&quot;final-result&quot;&gt;Final Result&lt;/h2&gt;
+
+&lt;p&gt;The final image and its depth map visualized on Photopea:-&lt;/p&gt;
+
+&lt;p class=&quot;centered&quot;&gt;&lt;img src=&quot;/assets/posts/images/portrait_example.jpg&quot; alt=&quot;Alt text&quot; width=&quot;250px&quot; align=&quot;center&quot; /&gt;&lt;/p&gt;
+
+&lt;p class=&quot;figcaption&quot;&gt;The original image&lt;/p&gt;
+
+&lt;p class=&quot;centered&quot;&gt;&lt;img src=&quot;/assets/posts/images/portrait_depth.png&quot; alt=&quot;Alt text&quot; width=&quot;250px&quot; align=&quot;center&quot; /&gt;&lt;/p&gt;
+
+&lt;p class=&quot;figcaption&quot;&gt;The depth map&lt;/p&gt;
+
+&lt;p&gt;The depth map is a grayscale image where the brightness corresponds inversely to the distance from the camera. So the brightest objects are the closest to the camera.&lt;/p&gt;
+
+&lt;p&gt;Strictly speaking this would be called a disparity map where disparity is inversely related to distance from the camera.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;A depth map describes at each pixel the distance to an object, in meters.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;A disparity map describes normalized shift values for use in comparing two images. The value for each pixel in the map is in units of 1/meters: (pixelShift / (pixelFocalLength * baselineInMeters)).&lt;sup id=&quot;fnref:4&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:4&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;In an upcoming blog post let’s check out how this info can be read directly using Swift and we’ll look at some interesting applications of this.&lt;/p&gt;
+
+&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://towardsdatascience.com/depth-estimation-1-basics-and-intuition-86f2c9538cd1&quot;&gt;Depth estimation basics and intuition by Daryl Tan - Medium&lt;/a&gt; &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:3&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://www.raywenderlich.com/8246240-image-depth-maps-tutorial-for-ios-getting-started#toc-anchor-011&quot;&gt;Image Depth Maps Tutorial for iOS - Ray Wenderlich&lt;/a&gt; &lt;a href=&quot;#fnref:3&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:4&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://developer.apple.com/documentation/avfoundation/avdepthdata&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AVDepthData&lt;/code&gt; Apple Developer Docs&lt;/a&gt; &lt;a href=&quot;#fnref:4&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;</content><author><name>Naga Sai Abhinay Devarinti</name></author><summary type="html"></summary></entry></feed>

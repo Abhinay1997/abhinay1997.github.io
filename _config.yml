@@ -1,7 +1,7 @@
 remote_theme: hydecorp/hydejack@v9.1.6
 accent_color: rgb( 17, 250, 13)
   
-title: Naga Devarinti
+title: Naga Sai Abhinay Devarinti
 lang: en
 
 # Blog settings
@@ -30,7 +30,7 @@ author:
 hydejack:
   # Code blocks and tables "break" the layout by spanning the full available width.
   # Set this to true if you want them to be the same width as other content.
-  no_break_layout:     true
+  no_break_layout: true
 
 plugins:
   - jekyll-default-layout

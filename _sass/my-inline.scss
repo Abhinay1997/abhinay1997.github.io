@@ -5,3 +5,10 @@ html {
     --border-color: #2d2d2d;
     }
 
+p.centered{
+    text-align: center;
+}
+
+a.footnote{
+    color: var(--accent-color-faded)
+}
