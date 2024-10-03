@@ -1,63 +1,138 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Blog</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
     <style>
+        :root[data-theme="light"] {
+            --bg-color: #ffffff;
+            --text-color: #333333;
+            --header-bg: #f8f9fa;
+            --code-bg: #f6f8fa;
+            --border-color: #eee;
+            --link-color: #3498db;
+        }
+        
+        :root[data-theme="dark"] {
+            --bg-color: #1a1a1a;
+            --text-color: #e0e0e0;
+            --header-bg: #2d2d2d;
+            --code-bg: #2d2d2d;
+            --border-color: #404040;
+            --link-color: #61afef;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             line-height: 1.6;
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
-            color: #333;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
+
         header {
-            border-bottom: 1px solid #eee;
+            background-color: var(--header-bg);
+            border-radius: 8px;
             margin-bottom: 20px;
-            padding-bottom: 20px;
+            padding: 20px;
         }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: 2px solid var(--text-color);
+            border-radius: 20px;
+            padding: 8px 16px;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            opacity: 0.8;
+        }
+
         h1 {
-            color: #2c3e50;
+            color: var(--text-color);
+            margin: 0 0 15px 0;
         }
+
+        .blog-description {
+            margin: 15px 0;
+            font-size: 1.1em;
+            color: var(--text-color);
+        }
+
         .post-list {
             list-style: none;
             padding: 0;
         }
-        .post-list li {
-            margin-bottom: 10px;
+
+        .post-item {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            transition: transform 0.2s ease;
         }
-        .post-list a {
-            color: #3498db;
+
+        .post-item:hover {
+            transform: translateX(5px);
+        }
+
+        .post-title {
+            color: var(--link-color);
             text-decoration: none;
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: block;
         }
-        .post-list a:hover {
-            text-decoration: underline;
+
+        .post-summary {
+            color: var(--text-color);
+            font-size: 0.9em;
+            margin: 8px 0 0 0;
         }
+
         pre {
-            background-color: #f6f8fa;
+            background-color: var(--code-bg);
             padding: 16px;
             border-radius: 6px;
             overflow-x: auto;
         }
+
         code {
             font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
         }
+
         img {
             max-width: 100%;
             height: auto;
         }
+
         #content {
             margin-top: 20px;
         }
+
         .back-link {
             display: inline-block;
             margin-bottom: 20px;
-            color: #3498db;
+            color: var(--link-color);
             text-decoration: none;
         }
+
         .back-link:hover {
             text-decoration: underline;
         }
@@ -65,13 +140,28 @@
 </head>
 <body>
     <header>
-        <h1>My Blog</h1>
+        <div class="header-content">
+            <h1>My Blog</h1>
+            <button class="theme-toggle" onclick="toggleTheme()">
+                Toggle Theme
+            </button>
+        </div>
+        <p class="blog-description">
+            Welcome to my personal blog where I share thoughts about technology, programming, and life.
+        </p>
     </header>
     
     <main>
         <div id="post-list">
             <ul class="post-list">
-                <li><a href="#" data-post="posts/transformer_painters.md">Transformer Layers As Painters</a></li>
+                <li class="post-item">
+                    <a href="#" class="post-title" data-post="posts/hello-world.md">Hello World</a>
+                    <p class="post-summary">My first blog post introducing myself and what I'll be writing about.</p>
+                </li>
+                <li class="post-item">
+                    <a href="#" class="post-title" data-post="posts/second-post.md">My Second Post</a>
+                    <p class="post-summary">Exploring the fundamentals of web development and modern JavaScript.</p>
+                </li>
             </ul>
         </div>
         
@@ -82,7 +172,23 @@
         const contentDiv = document.getElementById('content');
         const postList = document.getElementById('post-list');
         
-        // Configure marked to enable GitHub Flavored Markdown
+        // Theme management
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+        }
+
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme');
+            const next = current === 'light' ? 'dark' : 'light';
+            setTheme(next);
+        }
+
+        // Initialize theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        setTheme(savedTheme);
+
+        // Configure marked
         marked.setOptions({
             breaks: true,
             gfm: true
