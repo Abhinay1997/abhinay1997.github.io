@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Blog</title>
+    <title>Abhinay's Blog</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
     <style>
         :root[data-theme="light"] {
@@ -14,7 +15,7 @@
             --border-color: #eee;
             --link-color: #3498db;
         }
-        
+
         :root[data-theme="dark"] {
             --bg-color: #1a1a1a;
             --text-color: #e0e0e0;
@@ -38,8 +39,8 @@
         header {
             background-color: var(--header-bg);
             border-radius: 8px;
-            margin-bottom: 20px;
-            padding: 20px;
+            margin-bottom: 16px;
+            padding: 16px;
         }
 
         .header-content {
@@ -50,27 +51,34 @@
 
         .theme-toggle {
             background: none;
-            border: 2px solid var(--text-color);
-            border-radius: 20px;
-            padding: 8px 16px;
+            border: none;
+            padding: 8px;
             color: var(--text-color);
             cursor: pointer;
-            font-size: 14px;
             transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-toggle svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--text-color);
         }
 
         .theme-toggle:hover {
-            opacity: 0.8;
+            opacity: 0.7;
         }
 
-        h1 {
+        h2 {
             color: var(--text-color);
             margin: 0 0 15px 0;
         }
 
         .blog-description {
-            margin: 15px 0;
-            font-size: 1.1em;
+            margin: 5px 0;
+            font-size: 1em;
             color: var(--text-color);
         }
 
@@ -138,19 +146,28 @@
         }
     </style>
 </head>
+
 <body>
     <header>
         <div class="header-content">
-            <h1>My Blog</h1>
+            <h2>Abhinay</h2>
             <button class="theme-toggle" onclick="toggleTheme()">
-                Toggle Theme
+                <svg id="lightIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fill-rule="evenodd"
+                        d="M9.528 1.718a.75.75 0 0 1 .162.819A8.97 8.97 0 0 0 9 6a9 9 0 0 0 9 9 8.97 8.97 0 0 0 3.463-.69.75.75 0 0 1 .981.98 10.503 10.503 0 0 1-9.694 6.46c-5.799 0-10.5-4.7-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 0 1 .818.162Z"
+                        clip-rule="evenodd"/>
+                </svg>
+                <svg id="darkIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+                    <path
+                        d="M12 2.25a.75.75 0 0 1 .75.75v2.25a.75.75 0 0 1-1.5 0V3a.75.75 0 0 1 .75-.75ZM7.5 12a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM18.894 6.166a.75.75 0 0 0-1.06-1.06l-1.591 1.59a.75.75 0 1 0 1.06 1.061l1.591-1.59ZM21.75 12a.75.75 0 0 1-.75.75h-2.25a.75.75 0 0 1 0-1.5H21a.75.75 0 0 1 .75.75ZM17.834 18.894a.75.75 0 0 0 1.06-1.06l-1.59-1.591a.75.75 0 1 0-1.061 1.06l1.59 1.591ZM12 18a.75.75 0 0 1 .75.75V21a.75.75 0 0 1-1.5 0v-2.25A.75.75 0 0 1 12 18ZM7.758 17.303a.75.75 0 0 0-1.061-1.06l-1.591 1.59a.75.75 0 0 0 1.06 1.061l1.591-1.59ZM6 12a.75.75 0 0 1-.75.75H3a.75.75 0 0 1 0-1.5h2.25A.75.75 0 0 1 6 12ZM6.697 7.757a.75.75 0 0 0 1.06-1.06l-1.59-1.591a.75.75 0 0 0-1.061 1.06l1.59 1.591Z"/>
+                </svg>
             </button>
         </div>
         <p class="blog-description">
-            Welcome to my personal blog where I share thoughts about technology, programming, and life.
+            Just my little corner where I post my experiments and findings.
         </p>
     </header>
-    
+
     <main>
         <div id="post-list">
             <ul class="post-list">
@@ -164,17 +181,27 @@
                 </li>
             </ul>
         </div>
-        
+
         <div id="content"></div>
     </main>
 
     <script>
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const lightIcon = document.getElementById('lightIcon');
+        const darkIcon = document.getElementById('darkIcon');
         const contentDiv = document.getElementById('content');
         const postList = document.getElementById('post-list');
-        
+
         // Theme management
         function setTheme(theme) {
             document.documentElement.setAttribute('data-theme', theme);
+            if (theme === 'light'){
+                lightIcon.style.display = 'block';
+                darkIcon.style.display = 'none';
+            }else{
+                lightIcon.style.display = 'none';
+                darkIcon.style.display = 'block';
+            }
             localStorage.setItem('theme', theme);
         }
 
@@ -208,10 +235,10 @@
             try {
                 const response = await fetch(postPath);
                 if (!response.ok) throw new Error('Post not found');
-                
+
                 const markdown = await response.text();
                 postList.style.display = 'none';
-                
+
                 contentDiv.innerHTML = `
                     <a href="#" class="back-link" onclick="showPostList(event)">← Back to posts</a>
                     ${marked.parse(markdown)}
@@ -229,4 +256,5 @@
         }
     </script>
 </body>
+
 </html>
