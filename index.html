@@ -137,12 +137,20 @@
         .back-link {
             display: inline-block;
             margin-bottom: 20px;
-            color: var(--link-color);
+            background-color: var(--link-color);
             text-decoration: none;
+            position: fixed; /* Make the back link float */
+            bottom: 20px; /* Adjust distance from the top */
+            right: 20px; /* Adjust distance from the left */
+            color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+            padding: 10px 15px; /* Add some padding */
+            border-radius: 50%; /* Rounded corners */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+            transition: background-color 0.3s ease; /* Smooth transition */
         }
 
         .back-link:hover {
-            text-decoration: underline;
+            color: rgba(255, 255, 255, 1); /* Change background on hover */
         }
 
         .date{
@@ -241,7 +249,7 @@
                 postList.style.display = 'none';
 
                 contentDiv.innerHTML = `
-                    <a href="#" class="back-link" onclick="showPostList(event)">← Back to posts</a>
+                    <a href="#" class="back-link" onclick="showPostList(event)"> ← </a>
                     ${marked.parse(markdown)}
                 `;
             } catch (error) {
