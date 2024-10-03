@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Blog</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        header {
+            border-bottom: 1px solid #eee;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        .post-list {
+            list-style: none;
+            padding: 0;
+        }
+        .post-list li {
+            margin-bottom: 10px;
+        }
+        .post-list a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        .post-list a:hover {
+            text-decoration: underline;
+        }
+        pre {
+            background-color: #f6f8fa;
+            padding: 16px;
+            border-radius: 6px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        #content {
+            margin-top: 20px;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #3498db;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>My Blog</h1>
+    </header>
+    
+    <main>
+        <div id="post-list">
+            <ul class="post-list">
+                <li><a href="#" data-post="posts/transformer_painters.md">Transformer Layers As Painters</a></li>
+            </ul>
+        </div>
+        
+        <div id="content"></div>
+    </main>
+
+    <script>
+        const contentDiv = document.getElementById('content');
+        const postList = document.getElementById('post-list');
+        
+        // Configure marked to enable GitHub Flavored Markdown
+        marked.setOptions({
+            breaks: true,
+            gfm: true
+        });
+
+        // Handle post clicks
+        document.addEventListener('click', async (e) => {
+            if (e.target.matches('[data-post]')) {
+                e.preventDefault();
+                const postPath = e.target.dataset.post;
+                await loadPost(postPath);
+            }
+        });
+
+        // Load and render post content
+        async function loadPost(postPath) {
+            try {
+                const response = await fetch(postPath);
+                if (!response.ok) throw new Error('Post not found');
+                
+                const markdown = await response.text();
+                postList.style.display = 'none';
+                
+                contentDiv.innerHTML = `
+                    <a href="#" class="back-link" onclick="showPostList(event)">← Back to posts</a>
+                    ${marked.parse(markdown)}
+                `;
+            } catch (error) {
+                contentDiv.innerHTML = `<p>Error loading post: ${error.message}</p>`;
+            }
+        }
+
+        // Show post list
+        function showPostList(event) {
+            event.preventDefault();
+            postList.style.display = 'block';
+            contentDiv.innerHTML = '';
+        }
+    </script>
+</body>
+</html>
