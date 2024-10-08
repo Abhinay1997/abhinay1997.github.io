@@ -25,24 +25,40 @@
             --link-color: #61afef;
         }
 
-        a{
-            color:var(--link-color);
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
-        
-        a:visited {
-            color: #bf0ebf; /* Color for visited links */
-            text-decoration: none;
+
+        html, body {
+            height: 100%;
+            overflow-x: hidden;
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             line-height: 1.6;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
             color: var(--text-color);
             background-color: var(--bg-color);
             transition: background-color 0.3s ease, color 0.3s ease;
+            position: relative;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            width: 100%;
+        }
+
+        a {
+            color: var(--link-color);
+        }
+
+        a:visited {
+            color: #bf0ebf;
+            text-decoration: none;
         }
 
         header {
@@ -128,6 +144,7 @@
             padding: 16px;
             border-radius: 6px;
             overflow-x: auto;
+            max-width: 100%;
         }
 
         code {
@@ -141,57 +158,142 @@
 
         #content {
             margin-top: 20px;
+            width: 100%;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
         }
 
         .back-link {
-            display: inline-block;
-            margin-bottom: 20px;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
             background-color: var(--link-color);
+            color: rgba(255, 255, 255, 0.8);
             text-decoration: none;
-            position: fixed; /* Make the back link float */
-            bottom: 20px; /* Adjust distance from the top */
-            right: 20px; /* Adjust distance from the left */
-            color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
-            padding: 10px 15px; /* Add some padding */
-            border-radius: 50%; /* Rounded corners */
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Shadow for depth */
-            transition: background-color 0.3s ease; /* Smooth transition */
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
         }
 
         .back-link:hover {
-            color: rgba(255, 255, 255, 1); /* Change background on hover */
+            color: rgba(255, 255, 255, 1);
+            transform: scale(1.1);
         }
 
-        .date{
+        .date {
             font-size: x-small;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-icons a {
+            color: inherit;
+            text-decoration: none;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+
+        /* Lazy, I know ;) */
+        .draft{
+            display: none;
+        }
+        
+        .social-icons a:hover {
+            opacity: 1;
+        }
+
+        @media (max-width: 840px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .back-link {
+                bottom: 10px;
+                right: 10px;
+            }
         }
     </style>
 </head>
 
 <body>
-    <header>
-        <div class="header-content">
-            <h2>Abhinay</h2>
-            <button class="theme-toggle" onclick="toggleTheme()">
-                <svg id="lightIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
-                    <path fill-rule="evenodd"
-                        d="M9.528 1.718a.75.75 0 0 1 .162.819A8.97 8.97 0 0 0 9 6a9 9 0 0 0 9 9 8.97 8.97 0 0 0 3.463-.69.75.75 0 0 1 .981.98 10.503 10.503 0 0 1-9.694 6.46c-5.799 0-10.5-4.7-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 0 1 .818.162Z"
-                        clip-rule="evenodd"/>
-                </svg>
-                <svg id="darkIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
-                    <path
-                        d="M12 2.25a.75.75 0 0 1 .75.75v2.25a.75.75 0 0 1-1.5 0V3a.75.75 0 0 1 .75-.75ZM7.5 12a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM18.894 6.166a.75.75 0 0 0-1.06-1.06l-1.591 1.59a.75.75 0 1 0 1.06 1.061l1.591-1.59ZM21.75 12a.75.75 0 0 1-.75.75h-2.25a.75.75 0 0 1 0-1.5H21a.75.75 0 0 1 .75.75ZM17.834 18.894a.75.75 0 0 0 1.06-1.06l-1.59-1.591a.75.75 0 1 0-1.061 1.06l1.59 1.591ZM12 18a.75.75 0 0 1 .75.75V21a.75.75 0 0 1-1.5 0v-2.25A.75.75 0 0 1 12 18ZM7.758 17.303a.75.75 0 0 0-1.061-1.06l-1.591 1.59a.75.75 0 0 0 1.06 1.061l1.591-1.59ZM6 12a.75.75 0 0 1-.75.75H3a.75.75 0 0 1 0-1.5h2.25A.75.75 0 0 1 6 12ZM6.697 7.757a.75.75 0 0 0 1.06-1.06l-1.59-1.591a.75.75 0 0 0-1.061 1.06l1.59 1.591Z"/>
-                </svg>
-            </button>
-        </div>
-        <p class="blog-description">
-            Just my little corner where I post my experiments and findings.
-        </p>
-    </header>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h2>Abhinay</h2>
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    <svg id="lightIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M9.528 1.718a.75.75 0 0 1 .162.819A8.97 8.97 0 0 0 9 6a9 9 0 0 0 9 9 8.97 8.97 0 0 0 3.463-.69.75.75 0 0 1 .981.98 10.503 10.503 0 0 1-9.694 6.46c-5.799 0-10.5-4.7-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 0 1 .818.162Z"
+                            clip-rule="evenodd"/>
+                    </svg>
+                    <svg id="darkIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+                        <path
+                            d="M12 2.25a.75.75 0 0 1 .75.75v2.25a.75.75 0 0 1-1.5 0V3a.75.75 0 0 1 .75-.75ZM7.5 12a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM18.894 6.166a.75.75 0 0 0-1.06-1.06l-1.591 1.59a.75.75 0 1 0 1.06 1.061l1.591-1.59ZM21.75 12a.75.75 0 0 1-.75.75h-2.25a.75.75 0 0 1 0-1.5H21a.75.75 0 0 1 .75.75ZM17.834 18.894a.75.75 0 0 0 1.06-1.06l-1.59-1.591a.75.75 0 1 0-1.061 1.06l1.59 1.591ZM12 18a.75.75 0 0 1 .75.75V21a.75.75 0 0 1-1.5 0v-2.25A.75.75 0 0 1 12 18ZM7.758 17.303a.75.75 0 0 0-1.061-1.06l-1.591 1.59a.75.75 0 0 0 1.06 1.061l1.591-1.59ZM6 12a.75.75 0 0 1-.75.75H3a.75.75 0 0 1 0-1.5h2.25A.75.75 0 0 1 6 12ZM6.697 7.757a.75.75 0 0 0 1.06-1.06l-1.59-1.591a.75.75 0 0 0-1.061 1.06l1.59 1.591Z"/>
+                    </svg>
+                </button>
+            </div>
+            <p class="blog-description">
+                Just my little corner where I post my experiments and findings.
+            </p>
+            <div class="social-icons">
+                <a href="mailto:devarintinagasaiabhinay@gmail.com" aria-label="Email">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                        <rect width="20" height="16" x="2" y="4" rx="2"/>
+                        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                    </svg>
+                </a>
+                <a href="https://github.com/Abhinay1997" aria-label="GitHub">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/>
+                        <path d="M9 18c-4.51 2-5-2-7-2"/>
+                    </svg>
+                </a>
+                <a href="https://x.com/NagaSaiAbhinay" aria-label="X (formerly Twitter)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24">
+                        <path d="M14.095479,10.316482L22.286354,1h-1.940718l-7.115352,8.087682L7.551414,1H1l8.589488,12.231093L1,23h1.940717 l7.509372-8.542861L16.448587,23H23L14.095479,10.316482z M11.436522,13.338465l-0.871624-1.218704l-6.924311-9.68815h2.981339 l5.58978,7.82155l0.867949,1.218704l7.26506,10.166271h-2.981339L11.436522,13.338465z" fill="currentColor"/>
+                    </svg>
+                </a>
+            </div>
+        </header>
 
     <main>
         <div id="post-list">
             <ul class="post-list">
+                <li class="post-item draft">
+                    <a href="#" class="post-title" data-post="posts/flux-lora.md">Different LoRA configuration on Flux</a>
+                    <p class="post-summary">Test Flux on LoRA, MoRA, DoRA and AsyLoRA with rank sweep and multiple layer configs</p>
+                    <p class="date"> TBD, 2024</p>
+                </li>
+                <li class="post-item draft">
+                    <a href="#" class="post-title" data-post="posts/image-guidance.md">Test & Compare guidance for Flux generation</a>
+                    <p class="post-summary">Test guidance embedding vs CFG, CFG++ & SEG on image generation</p>
+                    <p class="date"> TBD, 2024</p>
+                </li>
+                <li class="post-item draft">
+                    <a href="#" class="post-title" data-post="posts/attention-scaling.md">Attention Scaling CogVideoX for Entropy Correction</a>
+                    <p class="post-summary">Transformer layers as painters approach but applied to DiT's.</p>
+                    <p class="date"> TBD, 2024</p>
+                </li>
+                <li class="post-item draft">
+                    <a href="#" class="post-title" data-post="posts/fifo-cogvideox.md">FIFO CogVideoX for Infinite Length Video Generation</a>
+                    <p class="post-summary">Transformer layers as painters approach but applied to DiT's.</p>
+                    <p class="date"> TBD, 2024</p>
+                </li>
+                <li class="post-item draft">
+                    <a href="#" class="post-title" data-post="posts/naive-inversion.md">Flux Latent Inversion - [Part 1]</a>
+                    <p class="post-summary">Transformer layers as painters approach but applied to DiT's.</p>
+                    <p class="date"> TBD, 2024</p>
+                </li>
                 <li class="post-item">
                     <a href="#" class="post-title" data-post="posts/transformer-layers.md">Extending 'Transformer layers as Painters' to DiT's</a>
                     <p class="post-summary">Transformer layers as painters approach but applied to DiT's.</p>
@@ -202,6 +304,7 @@
 
         <div id="content"></div>
     </main>
+    </div>
 
     <script>
         const darkModeToggle = document.getElementById('darkModeToggle');
