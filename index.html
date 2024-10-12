@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#ffffff" id="theme-color">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 
 <head>
     <meta charset="UTF-8">
@@ -212,6 +215,40 @@
             opacity: 1;
         }
 
+        #content {
+            margin-top: 20px;
+            width: 100%;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+        }
+
+        #content > p{
+            padding: 1em 0em;
+        }
+
+        #content > h3{
+            padding: 1em 0em;
+        }
+
+        #content > h4{
+            padding: 1em 0em;
+        }
+
+        #content > ol {
+            padding-left: 0.5em;
+        }
+
+        #content > ol li {
+            list-style-type: decimal; /* or 'decimal-leading-zero', 'upper-alpha', 'lower-alpha'... */
+            list-style-position: outside; /* or 'inside' */
+            margin-left: 1em; /* gives 'room' for the numbers to appear in */
+        }
+
+        #content > ul li {
+            list-style-position: outside; /* or 'inside' */
+            margin-left: 1em; /* gives 'room' for the numbers to appear in */
+        }
+
         @media (max-width: 840px) {
             .container {
                 padding: 15px;
@@ -307,6 +344,7 @@
     </div>
 
     <script>
+        const themeColorMeta = document.getElementById('theme-color');
         const darkModeToggle = document.getElementById('darkModeToggle');
         const lightIcon = document.getElementById('lightIcon');
         const darkIcon = document.getElementById('darkIcon');
@@ -319,9 +357,11 @@
             if (theme === 'light'){
                 lightIcon.style.display = 'block';
                 darkIcon.style.display = 'none';
+                themeColorMeta.setAttribute('content', '#ffffff')
             }else{
                 lightIcon.style.display = 'none';
                 darkIcon.style.display = 'block';
+                themeColorMeta.setAttribute('content', '#1a1a1a')
             }
             localStorage.setItem('theme', theme);
         }
