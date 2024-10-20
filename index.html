@@ -36,7 +36,6 @@
 
         html, body {
             height: 100%;
-            /* overflow-x: hidden; */
         }
 
         body {
@@ -239,14 +238,14 @@
         }
 
         #content > ol li {
-            list-style-type: decimal; /* or 'decimal-leading-zero', 'upper-alpha', 'lower-alpha'... */
-            list-style-position: outside; /* or 'inside' */
-            margin-left: 1em; /* gives 'room' for the numbers to appear in */
+            list-style-type: decimal;
+            list-style-position: outside;
+            margin-left: 1em;
         }
 
         #content > ul li {
-            list-style-position: outside; /* or 'inside' */
-            margin-left: 1em; /* gives 'room' for the numbers to appear in */
+            list-style-position: outside;
+            margin-left: 1em;
         }
 
         @media (max-width: 840px) {
@@ -263,6 +262,16 @@
 </head>
 
 <body>
+    <script>
+      (function(){
+        var redirect = sessionStorage.redirect;
+        delete sessionStorage.redirect;
+        if (redirect && redirect != location.href) {
+          history.replaceState(null, null, redirect);
+        }
+      })();
+    </script>
+
     <div class="container">
         <header>
             <div class="header-content">
@@ -303,49 +312,48 @@
             </div>
         </header>
 
-    <main>
-        <div id="post-list">
-            <ul class="post-list">
-                <li class="post-item draft">
-                    <a href="#" class="post-title" data-post="posts/flux-lora.md">Different LoRA configuration on Flux</a>
-                    <p class="post-summary">Test Flux on LoRA, MoRA, DoRA and AsyLoRA with rank sweep and multiple layer configs</p>
-                    <p class="date"> TBD, 2024</p>
-                </li>
-                <li class="post-item draft">
-                    <a href="#" class="post-title" data-post="posts/attention-scaling.md">Attention Scaling CogVideoX for Entropy Correction</a>
-                    <p class="post-summary">Transformer layers as painters approach but applied to DiT's.</p>
-                    <p class="date"> TBD, 2024</p>
-                </li>
-                <li class="post-item draft">
-                    <a href="#" class="post-title" data-post="posts/fifo-cogvideox.md">FIFO CogVideoX for Infinite Length Video Generation</a>
-                    <p class="post-summary">Transformer layers as painters approach but applied to DiT's.</p>
-                    <p class="date"> TBD, 2024</p>
-                </li>
-                <li class="post-item draft">
-                    <a href="#" class="post-title" data-post="posts/naive-inversion.md">Flux Latent Inversion - [Part 1]</a>
-                    <p class="post-summary">Naive inversion</p>
-                    <p class="date"> TBD, 2024</p>
-                </li>
-                <li class="post-item">
-                    <a href="#" class="post-title" data-post="posts/image-guidance.md">Test & Compare guidance for Flux generation</a>
-                    <p class="post-summary">Test guidance embedding vs CFG, CFG++ & SEG on image generation</p>
-                    <p class="date"> TBD, 2024</p>
-                </li>
-                <li class="post-item">
-                    <a href="#" class="post-title" data-post="posts/transformer-layers.md">Extending 'Transformer layers as Painters' to DiT's</a>
-                    <p class="post-summary">Transformer layers as painters approach but applied to DiT's.</p>
-                    <p class="date"> Aug 31, 2024</p>
-                </li>
-            </ul>
-        </div>
+        <main>
+            <div id="post-list">
+                <ul class="post-list">
+                    <li class="post-item draft">
+                        <a href="/post/flux-lora" class="post-title">Different LoRA configuration on Flux</a>
+                        <p class="post-summary">Test Flux on LoRA, MoRA, DoRA and AsyLoRA with rank sweep and multiple layer configs</p>
+                        <p class="date"> TBD, 2024</p>
+                    </li>
+                    <li class="post-item draft">
+                        <a href="/post/attention-scaling" class="post-title">Attention Scaling CogVideoX for Entropy Correction</a>
+                        <p class="post-summary">Transformer layers as<p class="post-summary">Transformer layers as painters approach but applied to DiT's.</p>
+                        <p class="date"> TBD, 2024</p>
+                    </li>
+                    <li class="post-item draft">
+                        <a href="/post/fifo-cogvideox" class="post-title">FIFO CogVideoX for Infinite Length Video Generation</a>
+                        <p class="post-summary">Transformer layers as painters approach but applied to DiT's.</p>
+                        <p class="date"> TBD, 2024</p>
+                    </li>
+                    <li class="post-item draft">
+                        <a href="/post/naive-inversion" class="post-title">Flux Latent Inversion - [Part 1]</a>
+                        <p class="post-summary">Naive inversion</p>
+                        <p class="date"> TBD, 2024</p>
+                    </li>
+                    <li class="post-item">
+                        <a href="/post/image-guidance" class="post-title">Test & Compare guidance for Flux generation</a>
+                        <p class="post-summary">Test guidance embedding vs CFG, CFG++ & SEG on image generation</p>
+                        <p class="date"> TBD, 2024</p>
+                    </li>
+                    <li class="post-item">
+                        <a href="/post/transformer-layers" class="post-title">Extending 'Transformer layers as Painters' to DiT's</a>
+                        <p class="post-summary">Transformer layers as painters approach but applied to DiT's.</p>
+                        <p class="date"> Aug 31, 2024</p>
+                    </li>
+                </ul>
+            </div>
 
-        <div id="content"></div>
-    </main>
+            <div id="content"></div>
+        </main>
     </div>
 
     <script>
         const themeColorMeta = document.getElementById('theme-color');
-        const darkModeToggle = document.getElementById('darkModeToggle');
         const lightIcon = document.getElementById('lightIcon');
         const darkIcon = document.getElementById('darkIcon');
         const contentDiv = document.getElementById('content');
@@ -382,40 +390,58 @@
             gfm: true
         });
 
-        // Handle post clicks
-        document.addEventListener('click', async (e) => {
-            if (e.target.matches('[data-post]')) {
-                e.preventDefault();
-                const postPath = e.target.dataset.post;
-                await loadPost(postPath);
+        // Handle navigation
+        function handleNavigation() {
+            const path = window.location.pathname;
+            if (path === '/' || path === '/index.html') {
+                showPostList();
+            } else if (path.startsWith('/post/')) {
+                const postSlug = path.split('/').pop();
+                loadPost(postSlug);
             }
-        });
+        }
 
         // Load and render post content
-        async function loadPost(postPath) {
+        async function loadPost(postSlug) {
             try {
-                const response = await fetch(postPath);
+                const response = await fetch(`/posts/${postSlug}.md`);
                 if (!response.ok) throw new Error('Post not found');
 
                 const markdown = await response.text();
                 postList.style.display = 'none';
 
                 contentDiv.innerHTML = `
-                    <a href="#" class="back-link" onclick="showPostList(event)"> ← </a>
+                    <a href="/" class="back-link"> ← </a>
                     ${marked.parse(markdown)}
                 `;
+                
+                // Update browser history
+                history.pushState(null, '', `/post/${postSlug}`);
             } catch (error) {
                 contentDiv.innerHTML = `<p>Error loading post: ${error.message}</p>`;
             }
         }
 
         // Show post list
-        function showPostList(event) {
-            event.preventDefault();
+        function showPostList() {
             postList.style.display = 'block';
             contentDiv.innerHTML = '';
+            history.pushState(null, '', '/');
         }
+
+        // Handle initial load and navigation
+        window.addEventListener('popstate', handleNavigation);
+        document.addEventListener('click', (e) => {
+            if (e.target.matches('.post-title') || e.target.matches('.back-link')) {
+                e.preventDefault();
+                const href = e.target.getAttribute('href');
+                history.pushState(null, '', href);
+                handleNavigation();
+            }
+        });
+
+        // Initial load
+        handleNavigation();
     </script>
 </body>
-
 </html>
