@@ -11,7 +11,7 @@ params:
   homeInfoParams:
     Title: Welcome
     # Content: Can be Info, links, about...
-  defaultTheme: "light"
+  defaultTheme: auto
   socialIcons: # optional
     - name: "twitter"
       url: "https://x.com/NagaSaiAbhinay"
