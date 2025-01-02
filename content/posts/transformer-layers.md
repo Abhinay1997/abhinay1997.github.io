@@ -1,4 +1,9 @@
-# Extending *Transformer layers as Painters* to DiT's
+---
+date: '2024-08-31T22:29:03+05:30'
+draft: false
+title: "Extending *Transformer layers as Painters* to DiT's"
+summary: "Exploring the possibility of a common represention space among the layers of a DiT"
+---
 
 The motivation for this experiment comes from "Transformer layers as Painters"<sup><a href="#ref1">[1]</a></sup>. by [Sakana AI](https://huggingface.co/SakanaAI) and [Emergence AI](https://huggingface.co/EmergenceAI) who suggest the existence of a common representation space among the layers of an LLM because of the residual connections.
 

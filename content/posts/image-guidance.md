@@ -1,4 +1,10 @@
-# Flux Image Guidance comparisons with different CFG-like methods
+---
+date: '2025-01-01T12:29:03+05:30'
+draft: true
+title: "CFG like guidance methods"
+summary: "Different guidance techniques"
+---
+Flux Image Guidance comparisons with different CFG-like methods
 
 ## TOC
 1. [Introduction](#introduction)
@@ -51,7 +57,7 @@ This can be applied on the model output or on the denoised sample at each timest
 With and without cfg.
 
 ## Citations
-
+None
 
 
 

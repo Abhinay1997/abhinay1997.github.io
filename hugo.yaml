@@ -1,0 +1,19 @@
+baseURL: https://abhinay1997.github.io/
+languageCode: en-us
+title: Abhi's blog
+theme: ["PaperMod"]
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+params:
+  homeInfoParams:
+    Title: Welcome
+    # Content: Can be Info, links, about...
+  defaultTheme: "light"
+  socialIcons: # optional
+    - name: "twitter"
+      url: "https://x.com/NagaSaiAbhinay"
+    - name: "github"
+      url: "https://github.com/Abhinay1997"

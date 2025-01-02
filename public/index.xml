@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Abhi&#39;s blog</title>
+    <link>http://localhost:1313/</link>
+    <description>Recent content on Abhi&#39;s blog</description>
+    <generator>Hugo -- 0.138.0</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 01 Jan 2025 22:29:03 +0530</lastBuildDate>
+    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>A Research paper library using Zotero</title>
+      <link>http://localhost:1313/posts/zoterro-infinicloud/</link>
+      <pubDate>Wed, 01 Jan 2025 22:29:03 +0530</pubDate>
+      <guid>http://localhost:1313/posts/zoterro-infinicloud/</guid>
+      <description>Setting up Zotero and Infinicloud webdav for saving research papers.</description>
+    </item>
+    <item>
+      <title>Extending *Transformer layers as Painters* to DiT&#39;s</title>
+      <link>http://localhost:1313/posts/transformer-layers/</link>
+      <pubDate>Sat, 31 Aug 2024 22:29:03 +0530</pubDate>
+      <guid>http://localhost:1313/posts/transformer-layers/</guid>
+      <description>Exploring the possibility of a common represention space among the layers of a DiT</description>
+    </item>
+  </channel>
+</rss>
